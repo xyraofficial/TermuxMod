@@ -73,14 +73,104 @@
                         android:contentDescription="@string/action_open_settings" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ios_card_bg"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="System Status"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="CPU: 15%"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="RAM: 2.4GB"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SESSIONS"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
                 <ListView
                     android:id="@+id/terminal_sessions_list"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_gravity="top"
                     android:layout_weight="1"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="4dp"
                     android:choiceMode="singleChoice"
                     android:longClickable="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QUICK ACTIONS"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageButton
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_settings"
+                            android:background="@drawable/ios_button_bg"
+                            android:layout_marginEnd="8dp"
+                            android:tint="#FFFFFF" />
+                        <ImageButton
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_copy"
+                            android:background="@drawable/ios_button_bg"
+                            android:layout_marginEnd="8dp"
+                            android:tint="#FFFFFF" />
+                        <ImageButton
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_share"
+                            android:background="@drawable/ios_button_bg"
+                            android:tint="#FFFFFF" />
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <LinearLayout
                     style="?android:attr/buttonBarStyle"
