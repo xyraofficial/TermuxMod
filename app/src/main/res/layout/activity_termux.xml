@@ -133,25 +133,105 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/ios_card_bg"
-                    android:orientation="horizontal">
-                    <TextView
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Network Monitor"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_network"
+                            android:tint="#80FFFFFF" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="DL: 2.5 MB/s"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="UL: 450 KB/s"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TERMINAL SHORTCUTS"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:alignmentMode="alignMargins"
+                    android:layout_marginBottom="16dp">
+                    <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Developer Mode"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:text="Update"
+                        android:textAllCaps="false"
                         android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-                    <Switch
-                        android:layout_width="wrap_content"
+                        android:background="@drawable/ios_button_bg" />
+                    <Button
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:thumbTint="@color/ios_glass_accent"
-                        android:trackTint="#40FFFFFF" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:text="Upgrade"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/ios_button_bg" />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:text="Clean"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/ios_button_bg" />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:text="Setup"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/ios_button_bg" />
+                </GridLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
