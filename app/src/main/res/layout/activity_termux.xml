@@ -91,23 +91,66 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_marginTop="8dp">
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:text="CPU: 15%"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/ios_progress_track" />
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="-4dp"
+                            android:background="@drawable/ios_progress_fill" />
+
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="RAM: 2.4GB"
+                            android:layout_marginTop="8dp"
+                            android:text="RAM: 2.4GB / 8GB"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/ios_progress_track" />
+                        <View
+                            android:layout_width="120dp"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="-4dp"
+                            android:background="@drawable/ios_progress_fill" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/ios_card_bg"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Developer Mode"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:thumbTint="@color/ios_glass_accent"
+                        android:trackTint="#40FFFFFF" />
                 </LinearLayout>
 
                 <TextView
