@@ -1,3 +1,16 @@
+## Redesign: Termux Pro (iOS Dark Glass & AI Neural Edition)
+
+The app has been completely redesigned with a "Full Stack" modern aesthetic:
+- **Theme:** iOS Dark Glass (Glassmorphism) with SF Blue accents.
+- **AI Neural Link:** Terminal interface featuring a cyan glowing border and a pulsing AI Orb.
+- **Sidebar (Pro Dashboard):**
+    - **System Status:** Real-time CPU/RAM monitoring with progress bars.
+    - **Network Monitor:** Live upload/download speed tracking.
+    - **Quick Actions:** One-tap buttons for Settings, Copy, and Share.
+    - **Terminal Shortcuts:** Grid of essential commands (Update, Upgrade, Clean, Setup).
+    - **Developer Mode:** Integrated toggle switch for advanced control.
+- **Architecture:** Maintained modular structure while enhancing the `app` resources and styles.
+
 # Termux App
 
 ## Overview
