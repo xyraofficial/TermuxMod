@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ios_glass_background">#CC1A1A1A</color>
+    <color name="ios_glass_surface">#802C2C2E</color>
+    <color name="ios_glass_accent">#0A84FF</color>
+    <color name="ios_glass_on_surface">#FFFFFF</color>
+    <color name="ios_glass_secondary">#99EBEBF5</color>
+    <color name="ios_glass_border">#33FFFFFF</color>
+    <color name="primary">#0A84FF</color>
+    <color name="primary_dark">#000000</color>
+    <color name="accent">#0A84FF</color>
+    <color name="background">#000000</color>
+    <color name="surface">#1C1C1E</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_background">#FFFFFF</color>
+    <color name="terminal_background">#000000</color>
+    <color name="terminal_foreground">#FFFFFF</color>
+</resources>
