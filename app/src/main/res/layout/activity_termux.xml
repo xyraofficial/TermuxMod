@@ -84,22 +84,31 @@
                     style="?android:attr/buttonBarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/surface"
+                    android:padding="8dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/toggle_keyboard_button"
                         style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textAllCaps="false"
+                        android:textColor="@color/on_primary"
+                        android:background="?android:attr/selectableItemBackground"
                         android:text="@string/action_toggle_soft_keyboard" />
 
                     <Button
                         android:id="@+id/new_session_button"
                         style="?android:attr/buttonBarButtonStyle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textAllCaps="false"
+                        android:textColor="@color/accent"
+                        android:textStyle="bold"
+                        android:background="?android:attr/selectableItemBackground"
                         android:text="@string/action_new_session" />
                 </LinearLayout>
             </LinearLayout>

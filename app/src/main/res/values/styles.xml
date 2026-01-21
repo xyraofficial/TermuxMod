@@ -27,9 +27,11 @@
     </style>
 
 
-    <style name="TermuxAlertDialogStyle" parent="@android:style/Theme.Material.Light.Dialog.Alert">
+    <style name="TermuxAlertDialogStyle" parent="@android:style/Theme.Material.Dialog.Alert">
         <!-- Seen in buttons on alert dialog: -->
-        <item name="android:colorAccent">#212121</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:background">@color/surface</item>
+        <item name="android:textColorPrimary">@color/on_primary</item>
     </style>
 
 </resources>
