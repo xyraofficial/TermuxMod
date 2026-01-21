@@ -35,10 +35,12 @@
 
             <LinearLayout
                 android:id="@+id/left_drawer"
-                android:layout_width="240dp"
+                android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:background="@android:color/white"
+                android:background="@color/surface"
+                android:elevation="8dp"
+                android:padding="16dp"
                 android:choiceMode="singleChoice"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp"
@@ -48,13 +50,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Termux Redesign"
+                        android:textColor="@color/on_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                     <ImageButton
                         android:id="@+id/settings_button"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:src="@drawable/ic_settings"
-                        android:background="@null"
+                        android:tint="@color/on_primary"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:contentDescription="@string/action_open_settings" />
                 </LinearLayout>
 
