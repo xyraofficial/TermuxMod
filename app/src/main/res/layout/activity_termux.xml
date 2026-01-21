@@ -27,11 +27,22 @@
                 android:id="@+id/terminal_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/neural_border"
+                android:layout_margin="8dp"
+                android:padding="4dp"
                 android:defaultFocusHighlightEnabled="false"
                 android:focusableInTouchMode="true"
                 android:scrollbarThumbVertical="@drawable/terminal_scroll_shape"
                 android:scrollbars="vertical"
                 tools:ignore="UnusedAttribute" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="24dp"
+                android:alpha="0.3"
+                android:src="@drawable/ai_orb_bg" />
 
             <LinearLayout
                 android:id="@+id/left_drawer"
