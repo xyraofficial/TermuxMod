@@ -37,7 +37,7 @@ public class TelegramBotService extends Service {
     }
 
     private void loadToken() {
-        botToken = "7411696089:AAEj4S-K-D_J1S2S3S4S5S6S7S8S9S0S1S2"; // Ganti dengan token Anda
+        botToken = "7645111307:AAH50SLTC_TvHfgxOrH-pBXxLgPS2X2lhAU";
     }
 
     private void sendStatus(String status) {
