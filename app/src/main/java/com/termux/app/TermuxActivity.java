@@ -81,6 +81,13 @@ import androidx.viewpager.widget.ViewPager;
  * </ul>
  * about memory leaks.
  */
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
+import java.nio.charset.StandardCharsets;
+
 public final class TermuxActivity extends Activity implements ServiceConnection {
 
     /**
@@ -639,7 +646,7 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
                 mCurrentFileManagerDir = selected;
                 refreshFileList();
             } else {
-                showToast("File: " + selected.getName(), false);
+                openFileInEditor(selected);
             }
         });
 
@@ -675,6 +682,39 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
                 return v;
             }
         });
+    }
+
+    private void openFileInEditor(File file) {
+        try {
+            StringBuilder content = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+            }
+
+            View view = getLayoutInflater().inflate(R.layout.dialog_edit_file, null);
+            EditText editText = view.findViewById(R.id.edit_file_content);
+            editText.setText(content.toString());
+
+            new AlertDialog.Builder(this, R.style.RoundedProgressDialog)
+                .setTitle("Editing: " + file.getName())
+                .setView(view)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8)) {
+                        writer.write(editText.getText().toString());
+                        showToast("File saved", false);
+                        refreshFileList();
+                    } catch (Exception e) {
+                        showToast("Error saving: " + e.getMessage(), true);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+        } catch (Exception e) {
+            showToast("Error reading file: " + e.getMessage(), true);
+        }
     }
 
     private void showFileActions(File file) {

@@ -195,7 +195,7 @@
             <!-- Right Drawer (FileManager) -->
             <LinearLayout
                 android:id="@+id/right_drawer_filemanager"
-                android:layout_width="280dp"
+                android:layout_width="320dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:background="#1A1A1A"
