@@ -36,6 +36,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_device"
+                    android:layout_marginBottom="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,6 +65,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_storage"
+                    android:layout_marginBottom="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,6 +92,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_root"
+                    android:layout_marginBottom="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,6 +119,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_ip"
+                    android:layout_marginBottom="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -128,12 +148,13 @@
                         android:textStyle="bold"
                         android:ellipsize="end"
                         android:singleLine="true" />
-                    <TextView
+                    <ImageView
                         android:id="@+id/ip_toggle_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" 👁️"
-                        android:textSize="10sp" />
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_eye_open"
+                        android:contentDescription="Toggle IP Visibility" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

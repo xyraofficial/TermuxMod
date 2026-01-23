@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Build;
 import android.os.Environment;
@@ -586,12 +587,12 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
             TextView rootTv = findViewById(R.id.info_root);
             TextView ipTv = findViewById(R.id.info_ip);
             View ipContainer = findViewById(R.id.ip_container);
-            TextView ipToggleIcon = findViewById(R.id.ip_toggle_icon);
+            ImageView ipToggleIcon = findViewById(R.id.ip_toggle_icon);
 
             ipContainer.setOnClickListener(v -> {
                 mIpHidden = !mIpHidden;
                 ipTv.setText(mIpHidden ? "*****" : mActualIp);
-                ipToggleIcon.setText(mIpHidden ? " 🕶️" : " 👁️");
+                ipToggleIcon.setImageResource(mIpHidden ? R.drawable.ic_eye_closed : R.drawable.ic_eye_open);
             });
 
             // Device Info
