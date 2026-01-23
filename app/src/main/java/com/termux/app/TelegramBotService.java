@@ -37,15 +37,7 @@ public class TelegramBotService extends Service {
     }
 
     private void loadToken() {
-        try {
-            InputStream is = getAssets().open(".env");
-            Properties prop = new Properties();
-            prop.load(is);
-            botToken = prop.getProperty("TELEGRAM_BOT_TOKEN");
-            is.close();
-        } catch (Exception e) {
-            Log.e(TAG, "Error loading token", e);
-        }
+        botToken = "7290141699:AAG4HjE9S6i9T2S3S4S5S6S7S8S9S0S1S2"; // HARDCODED_TOKEN_FOR_BUILD
     }
 
     private void sendStatus(String status) {
