@@ -30,16 +30,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import android.widget.BaseAdapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
-import java.io.File;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Locale;
 import com.termux.R;
 import com.termux.app.terminal.TermuxActivityRootView;
 import com.termux.shared.activities.ReportActivity;
@@ -247,6 +246,8 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
         setToggleKeyboardView();
 
         updateInfoNav();
+
+        setupFileManager();
 
         registerForContextMenu(mTerminalView);
 
@@ -621,6 +622,81 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
         } catch (Exception e) {
             Logger.logStackTraceWithMessage(LOG_TAG, "Failed to update info nav", e);
         }
+    }
+
+    private File mCurrentFileManagerDir;
+    private File[] mCurrentFiles;
+
+    private void setupFileManager() {
+        mCurrentFileManagerDir = new File(TermuxConstants.TERMUX_HOME_DIR_PATH);
+        ListView fileListView = findViewById(R.id.file_list_view);
+        
+        refreshFileList();
+
+        fileListView.setOnItemClickListener((parent, view, position, id) -> {
+            File selected = mCurrentFiles[position];
+            if (selected.isDirectory()) {
+                mCurrentFileManagerDir = selected;
+                refreshFileList();
+            } else {
+                showToast("File: " + selected.getName(), false);
+            }
+        });
+
+        fileListView.setOnItemLongClickListener((parent, view, position, id) -> {
+            File selected = mCurrentFiles[position];
+            showFileActions(selected);
+            return true;
+        });
+    }
+
+    private void refreshFileList() {
+        mCurrentFiles = mCurrentFileManagerDir.listFiles();
+        if (mCurrentFiles == null) mCurrentFiles = new File[0];
+        
+        Arrays.sort(mCurrentFiles, (f1, f2) -> {
+            if (f1.isDirectory() && !f2.isDirectory()) return -1;
+            if (!f1.isDirectory() && f2.isDirectory()) return 1;
+            return f1.getName().compareToIgnoreCase(f2.getName());
+        });
+
+        ListView fileListView = findViewById(R.id.file_list_view);
+        fileListView.setAdapter(new BaseAdapter() {
+            @Override public int getCount() { return mCurrentFiles.length; }
+            @Override public Object getItem(int p) { return mCurrentFiles[p]; }
+            @Override public long getItemId(int p) { return p; }
+            @Override public View getView(int p, View v, ViewGroup parent) {
+                if (v == null) v = getLayoutInflater().inflate(R.layout.item_file, parent, false);
+                File file = mCurrentFiles[p];
+                ((TextView) v.findViewById(R.id.file_name)).setText(file.getName());
+                ((ImageView) v.findViewById(R.id.file_icon)).setImageResource(file.isDirectory() ? R.drawable.ic_folder : R.drawable.ic_file);
+                String info = file.isDirectory() ? "Folder" : (file.length() / 1024) + " KB";
+                ((TextView) v.findViewById(R.id.file_info)).setText(info);
+                return v;
+            }
+        });
+    }
+
+    private void showFileActions(File file) {
+        new AlertDialog.Builder(this)
+            .setTitle(file.getName())
+            .setItems(new String[]{"Rename", "Delete", "Copy Path"}, (dialog, which) -> {
+                if (which == 0) { // Rename
+                    TextInputDialogUtils.textInput(this, R.string.action_rename_session, file.getName(), R.string.ok, text -> {
+                        if (file.renameTo(new File(file.getParentFile(), text))) refreshFileList();
+                    }, -1, null, -1, null, null);
+                } else if (which == 1) { // Delete
+                    new AlertDialog.Builder(this)
+                        .setMessage("Hapus " + file.getName() + "?")
+                        .setPositiveButton("Ya", (d, w) -> {
+                            if (file.delete()) refreshFileList();
+                        }).setNegativeButton("Tidak", null).show();
+                } else if (which == 2) {
+                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setPrimaryClip(android.content.ClipData.newPlainText("Path", file.getAbsolutePath()));
+                    showToast("Path copied", false);
+                }
+            }).show();
     }
 
     public void finishActivityIfNotFinishing() {
