@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
 import java.nio.charset.StandardCharsets;
 
 import com.termux.R;
+import com.termux.app.TermuxService;
 import com.termux.app.settings.properties.TermuxAppSharedProperties;
 import com.termux.app.terminal.TermuxActivityRootView;
 import com.termux.app.terminal.TermuxSessionsListViewController;
@@ -67,6 +68,9 @@ import com.termux.app.terminal.TermuxTerminalViewClient;
 import com.termux.shared.settings.preferences.TermuxAppSharedPreferences;
 import com.termux.shared.terminal.io.extrakeys.ExtraKeysView;
 import com.termux.view.TerminalView;
+import com.termux.view.TerminalViewClient;
+import com.termux.shared.terminal.TermuxTerminalViewClientBase;
+import com.termux.shared.terminal.TermuxTerminalSessionClientBase;
 
 public final class TermuxActivity extends Activity implements ServiceConnection {
 
