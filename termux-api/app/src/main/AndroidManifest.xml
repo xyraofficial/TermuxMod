@@ -61,12 +61,18 @@
 
 
     <application
-        tools:node="merge">
+        android:name=".TermuxAPIApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.Material.Light"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity
             android:name=".activities.TermuxAPIMainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Termux">
+            android:theme="@style/Theme.BaseActivity.DayNight.NoActionBar">
         </activity>
 
         <activity-alias
@@ -83,7 +89,7 @@
             android:name=".settings.activities.TermuxAPISettingsActivity"
             android:exported="true"
             android:label="@string/sets__root___val__activity_title"
-            android:theme="@style/Theme.Termux">
+            android:theme="@style/Theme.BaseActivity.DayNight.NoActionBar">
         </activity>
 
         <activity android:name=".activities.TermuxApiPermissionActivity"

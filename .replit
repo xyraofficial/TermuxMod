@@ -16,15 +16,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Gradle Help (Validation)"
+args = "Build Termux APK"
 
 [[workflows.workflow]]
-name = "Gradle Help (Validation)"
+name = "Build Termux APK"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./gradlew help"
+args = "./gradlew assembleDebug"
 
 [workflows.workflow.metadata]
 outputType = "console"

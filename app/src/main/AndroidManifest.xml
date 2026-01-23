@@ -71,8 +71,7 @@
         android:label="@string/application_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.Termux"
-        tools:replace="android:allowBackup,android:icon,android:label,android:name,android:supportsRtl,android:theme">
+        android:theme="@style/Theme.Termux">
 
         <activity
             android:name=".app.TermuxActivity"
@@ -127,7 +126,6 @@
             android:name=".shared.activities.ReportActivity"
             android:theme="@style/Theme.AppCompat.TermuxReportActivity"
             android:documentLaunchMode="intoExisting"
-            tools:replace="android:theme"
             />
 
         <activity
@@ -232,13 +230,6 @@
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
 
-        <receiver android:name="com.termux.api.TermuxApiReceiver"
-            android:exported="true"
-            android:permission="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND"
-            tools:replace="android:exported">
-            <intent-filter>
-                <action android:name="com.termux.api.TermuxApiReceiver" />
-            </intent-filter>
-        </receiver>
     </application>
+
 </manifest>
