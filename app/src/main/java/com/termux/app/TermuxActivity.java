@@ -70,6 +70,11 @@ import com.termux.shared.activities.ReportActivity;
 import com.termux.terminal.TerminalSession;
 import com.termux.app.utils.TextInputDialogUtils;
 
+import com.termux.shared.termux.TermuxConstants;
+import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY;
+import com.termux.app.utils.TextInputDialogUtils;
+import com.termux.app.TermuxInstaller;
+
 import com.termux.R;
 import com.termux.app.TermuxService;
 import com.termux.app.settings.properties.TermuxAppSharedProperties;
