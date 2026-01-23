@@ -70,10 +70,16 @@ import com.termux.shared.termux.TermuxUtils;
 import com.termux.shared.activities.ReportActivity;
 import com.termux.terminal.TerminalSession;
 import com.termux.shared.interact.TextInputDialogUtils;
+import com.termux.shared.view.ViewUtils;
+import com.termux.shared.packages.PermissionUtils;
+import com.termux.shared.data.DataUtils;
 
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.app.TermuxInstaller;
+import com.termux.app.activities.SettingsActivity;
+import com.termux.app.activities.HelpActivity;
 import com.termux.app.terminal.io.TerminalToolbarViewPager;
+import static com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY;
 
 import com.termux.R;
 import com.termux.app.TermuxService;
