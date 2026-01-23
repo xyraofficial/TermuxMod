@@ -1,5 +1,0 @@
-<resources>
-    <style name="RoundedProgressDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/nav_background</item>
-    </style>
-</resources>
