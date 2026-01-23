@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
 import java.nio.charset.StandardCharsets;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.core.content.ContextCompat;
