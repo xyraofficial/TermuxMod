@@ -109,7 +109,25 @@ final class TermuxInstaller {
             Logger.logInfo(LOG_TAG, "The termux prefix directory \"" + TERMUX_PREFIX_DIR_PATH + "\" does not exist but another file exists at its destination.");
         }
 
-        final ProgressDialog progress = ProgressDialog.show(activity, null, activity.getString(R.string.bootstrap_installer_body), true, false);
+        final byte[] zipBytes = loadZipBytes();
+        
+        // Count entries for progress bar
+        int totalEntries = 0;
+        try (ZipInputStream countStream = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
+            while (countStream.getNextEntry() != null) totalEntries++;
+        } catch (Exception e) {
+            totalEntries = 100; // Fallback
+        }
+
+        final ProgressDialog progress = new ProgressDialog(activity);
+        progress.setTitle(null);
+        progress.setMessage(activity.getString(R.string.bootstrap_installer_body));
+        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progress.setIndeterminate(false);
+        progress.setCancelable(false);
+        progress.setMax(totalEntries);
+        progress.show();
+
         new Thread() {
             @Override
             public void run() {
@@ -165,6 +183,7 @@ final class TermuxInstaller {
                                     String oldPath = parts[0];
                                     String newPath = TERMUX_STAGING_PREFIX_DIR_PATH + "/" + parts[1];
                                     symlinks.add(Pair.create(oldPath, newPath));
+                                    activity.runOnUiThread(() -> progress.incrementProgressBy(1));
 
                                     error = ensureDirectoryExists(new File(newPath).getParentFile());
                                     if (error != null) {
@@ -196,6 +215,7 @@ final class TermuxInstaller {
                                         Os.chmod(targetFile.getAbsolutePath(), 0700);
                                     }
                                 }
+                                activity.runOnUiThread(() -> progress.incrementProgressBy(1));
                             }
                         }
                     }
