@@ -65,14 +65,15 @@ android {
         }
     }
 
-    signingConfigs {
-        debug {
-            storeFile file('dev_keystore.jks')
-            keyAlias 'alias'
-            storePassword System.getenv("DEBUG_KEYSTORE_PASSWORD") ?: ''
-            keyPassword System.getenv("DEBUG_KEY_PASSWORD") ?: ''
-        }
-    }
+    // signingConfigs disabled - using default debug signing
+    // signingConfigs {
+    //     debug {
+    //         storeFile file('dev_keystore.jks')
+    //         keyAlias 'alias'
+    //         storePassword System.getenv("DEBUG_KEYSTORE_PASSWORD") ?: ''
+    //         keyPassword System.getenv("DEBUG_KEY_PASSWORD") ?: ''
+    //     }
+    // }
 
     buildTypes {
         release {
