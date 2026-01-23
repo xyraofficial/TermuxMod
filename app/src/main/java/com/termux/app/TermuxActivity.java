@@ -446,7 +446,7 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
         RelativeLayout relativeLayout = findViewById(R.id.activity_termux_root_relative_layout);
         int marginHorizontal = mProperties.getTerminalMarginHorizontal();
         int marginVertical = mProperties.getTerminalMarginVertical();
-        ViewUtils.setLayoutMarginsInDp(relativeLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
+        com.termux.app.utils.ViewUtils.setLayoutMarginsInDp(relativeLayout, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
     }
 
 
@@ -501,8 +501,8 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
         if (savedInstanceState != null)
             savedTextInput = savedInstanceState.getString(ARG_TERMINAL_TOOLBAR_TEXT_INPUT);
 
-        terminalToolbarViewPager.setAdapter(new TerminalToolbarViewPager.PageAdapter(this, savedTextInput));
-        terminalToolbarViewPager.addOnPageChangeListener(new TerminalToolbarViewPager.OnPageChangeListener(this, terminalToolbarViewPager));
+        terminalToolbarViewPager.setAdapter(new com.termux.app.terminal.io.TerminalToolbarViewPager.PageAdapter(this, savedTextInput));
+        terminalToolbarViewPager.addOnPageChangeListener(new com.termux.app.terminal.io.TerminalToolbarViewPager.OnPageChangeListener(this, terminalToolbarViewPager));
     }
 
     private void setTerminalToolbarHeight() {
