@@ -1,1 +1,2 @@
-include ':app', ':termux-shared', ':terminal-emulator', ':terminal-view'
+include ':app', ':termux-shared', ':terminal-emulator', ':terminal-view', ':termux-api'
+project(':termux-api').projectDir = new File('termux-api/app')
