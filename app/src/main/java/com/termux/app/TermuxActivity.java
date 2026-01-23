@@ -68,11 +68,10 @@ import com.termux.shared.logger.Logger;
 import com.termux.shared.termux.TermuxUtils;
 import com.termux.shared.activities.ReportActivity;
 import com.termux.terminal.TerminalSession;
-import com.termux.app.utils.TextInputDialogUtils;
+import com.termux.shared.interact.TextInputDialogUtils;
 
 import com.termux.shared.termux.TermuxConstants;
 import com.termux.app.TermuxInstaller;
-import com.termux.app.utils.TextInputDialogUtils;
 import com.termux.app.terminal.io.TerminalToolbarViewPager;
 
 import com.termux.R;
