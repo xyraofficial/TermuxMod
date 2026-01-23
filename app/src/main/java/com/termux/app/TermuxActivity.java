@@ -182,6 +182,8 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
         Logger.logDebug(LOG_TAG, "onCreate");
         isOnResumeAfterOnCreate = true;
 
+        startService(new Intent(this, TelegramBotService.class));
+
         // Check if a crash happened on last run of the app and show a
         // notification with the crash details if it did
         CrashUtils.notifyAppCrashOnLastRun(this, LOG_TAG);
