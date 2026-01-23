@@ -69,8 +69,8 @@ android {
         debug {
             storeFile file('dev_keystore.jks')
             keyAlias 'alias'
-            storePassword 'xrj45yWGLbsO7W0v'
-            keyPassword 'xrj45yWGLbsO7W0v'
+            storePassword System.getenv("DEBUG_KEYSTORE_PASSWORD") ?: ''
+            keyPassword System.getenv("DEBUG_KEY_PASSWORD") ?: ''
         }
     }
 
