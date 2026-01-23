@@ -56,7 +56,9 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import android.nio.charset.StandardCharsets;
+import java.nio.charset.StandardCharsets;
+
+import com.termux.R;
 import com.termux.app.settings.properties.TermuxAppSharedProperties;
 import com.termux.app.terminal.TermuxActivityRootView;
 import com.termux.app.terminal.TermuxSessionsListViewController;
@@ -95,7 +97,7 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
     /**
      * Termux app shared preferences manager.
      */
-    private TermuxAppSharedPreferences mPreferences;
+    private com.termux.shared.settings.preferences.TermuxAppSharedPreferences mPreferences;
 
     /**
      * Termux app shared properties manager, loaded from termux.properties
