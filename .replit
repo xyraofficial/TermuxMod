@@ -7,24 +7,3 @@ channel = "stable-25_05"
 packages = ["unzip"]
 
 [workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Build Termux APK"
-
-[[workflows.workflow]]
-name = "Build Termux APK"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew assembleDebug"
-
-[workflows.workflow.metadata]
-outputType = "console"
