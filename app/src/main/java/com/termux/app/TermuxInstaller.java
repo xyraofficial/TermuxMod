@@ -119,7 +119,7 @@ final class TermuxInstaller {
             totalEntries = 100; // Fallback
         }
 
-        final ProgressDialog progress = new ProgressDialog(activity);
+        final ProgressDialog progress = new ProgressDialog(activity, R.style.RoundedProgressDialog);
         progress.setTitle(null);
         progress.setMessage(activity.getString(R.string.bootstrap_installer_body));
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

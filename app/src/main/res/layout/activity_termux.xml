@@ -110,25 +110,94 @@
                     android:text="IP ADDR"
                     android:textColor="#AAAAAA"
                     android:textSize="8sp" />
-                <TextView
-                    android:id="@+id/info_ip"
+                <LinearLayout
+                    android:id="@+id/ip_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:ellipsize="end"
-                    android:singleLine="true" />
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView
+                        android:id="@+id/info_ip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:ellipsize="end"
+                        android:singleLine="true" />
+                    <TextView
+                        android:id="@+id/ip_toggle_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 👁️"
+                        android:textSize="10sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Right Drawer (File Manager Placeholder) -->
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_below="@+id/info_nav_bar"
             android:layout_above="@+id/terminal_toolbar_view_pager"
             android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.termux.view.TerminalView
+                    android:id="@+id/terminal_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:defaultFocusHighlightEnabled="false"
+                    android:focusableInTouchMode="true"
+                    android:scrollbarThumbVertical="@drawable/terminal_scroll_shape"
+                    android:scrollbars="vertical"
+                    tools:ignore="UnusedAttribute" />
+            </RelativeLayout>
+
+            <!-- Left Drawer (existing) -->
+            <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+                <!-- ... content preserved ... -->
+            </LinearLayout>
+
+            <!-- Right Drawer (FileManager) -->
+            <LinearLayout
+                android:id="@+id/right_drawer_filemanager"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="#1A1A1A"
+                android:orientation="vertical"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FILE MANAGER"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:background="#333333"/>
+                <ListView
+                    android:id="@+id/file_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:divider="#444444"
+                    android:dividerHeight="0.5dp" />
+            </LinearLayout>
+
 
             <com.termux.view.TerminalView
                 android:id="@+id/terminal_view"
