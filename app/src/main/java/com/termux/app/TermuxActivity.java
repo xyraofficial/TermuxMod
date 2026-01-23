@@ -81,12 +81,13 @@ import androidx.viewpager.widget.ViewPager;
  * </ul>
  * about memory leaks.
  */
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.nio.charset.StandardCharsets;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class TermuxActivity extends Activity implements ServiceConnection {
 
@@ -696,7 +697,24 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
 
             View view = getLayoutInflater().inflate(R.layout.dialog_edit_file, null);
             EditText editText = view.findViewById(R.id.edit_file_content);
+            TextView lineNumbers = view.findViewById(R.id.editor_line_numbers);
+            TextView fileTypeTv = view.findViewById(R.id.editor_file_type);
+            
+            String fileName = file.getName().toLowerCase();
+            fileTypeTv.setText(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
+            
             editText.setText(content.toString());
+            updateLineNumbers(editText, lineNumbers);
+            applySyntaxHighlighting(editText.getText(), fileName);
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                @Override public void afterTextChanged(Editable s) {
+                    updateLineNumbers(editText, lineNumbers);
+                    applySyntaxHighlighting(s, fileName);
+                }
+            });
 
             new AlertDialog.Builder(this, R.style.RoundedProgressDialog)
                 .setTitle("Editing: " + file.getName())
@@ -714,6 +732,53 @@ public final class TermuxActivity extends Activity implements ServiceConnection 
                 .show();
         } catch (Exception e) {
             showToast("Error reading file: " + e.getMessage(), true);
+        }
+    }
+
+    private void updateLineNumbers(EditText editText, TextView lineNumbers) {
+        int lineCount = editText.getLineCount();
+        if (lineCount == 0) lineCount = 1;
+        StringBuilder lines = new StringBuilder();
+        for (int i = 1; i <= lineCount; i++) {
+            lines.append(i).append("\n");
+        }
+        lineNumbers.setText(lines.toString());
+    }
+
+    private void applySyntaxHighlighting(Spannable text, String fileName) {
+        // Clear existing spans
+        Object[] spans = text.getSpans(0, text.length(), ForegroundColorSpan.class);
+        for (Object span : spans) text.removeSpan(span);
+
+        // VSCode Theme Colors
+        int colorKeyword = 0xFF569CD6;
+        int colorString = 0xFFCE9178;
+        int colorComment = 0xFF6A9955;
+        int colorNumber = 0xFFB5CEA8;
+        int colorFunc = 0xFFDCDCAA;
+
+        // Keywords (Generic for many languages)
+        String keywords = "\\b(class|def|function|var|let|const|if|else|for|while|return|import|from|as|try|except|catch|finally|public|private|static|void|int|float|double|boolean|String|true|false|null)\\b";
+        highlightPattern(text, keywords, colorKeyword);
+
+        // Strings
+        highlightPattern(text, "\".*?\"|'.*?'", colorString);
+
+        // Numbers
+        highlightPattern(text, "\\b\\d+\\b", colorNumber);
+
+        // Comments
+        highlightPattern(text, "//.*|#.*|/\\*.*?\\*/", colorComment);
+        
+        // Functions
+        highlightPattern(text, "\\b[a-zA-Z_]\\w*(?=\\s*\\()", colorFunc);
+    }
+
+    private void highlightPattern(Spannable text, String regex, int color) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            text.setSpan(new ForegroundColorSpan(color), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 
