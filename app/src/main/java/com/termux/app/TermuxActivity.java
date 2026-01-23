@@ -58,6 +58,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.nio.charset.StandardCharsets;
 
+import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.core.content.ContextCompat;
+
+import com.termux.app.utils.CrashUtils;
+import com.termux.shared.logger.Logger;
+import com.termux.shared.termux.TermuxUtils;
+import com.termux.shared.activities.ReportActivity;
+import com.termux.terminal.TerminalSession;
+import com.termux.app.utils.TextInputDialogUtils;
+
 import com.termux.R;
 import com.termux.app.TermuxService;
 import com.termux.app.settings.properties.TermuxAppSharedProperties;
