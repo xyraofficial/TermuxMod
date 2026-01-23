@@ -82,7 +82,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.debug
+            // Debug builds use default signing
         }
     }
 
