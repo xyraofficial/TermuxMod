@@ -30,57 +30,25 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import android.widget.BaseAdapter;
+import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.Locale;
-import com.termux.R;
-import com.termux.app.terminal.TermuxActivityRootView;
-import com.termux.shared.activities.ReportActivity;
-import com.termux.shared.packages.PermissionUtils;
-import com.termux.shared.data.DataUtils;
-import com.termux.shared.termux.TermuxConstants;
-import com.termux.shared.termux.TermuxConstants.TERMUX_APP.TERMUX_ACTIVITY;
-import com.termux.app.activities.HelpActivity;
-import com.termux.app.activities.SettingsActivity;
-import com.termux.shared.settings.preferences.TermuxAppSharedPreferences;
-import com.termux.app.terminal.TermuxSessionsListViewController;
-import com.termux.app.terminal.io.TerminalToolbarViewPager;
-import com.termux.app.terminal.TermuxTerminalSessionClient;
-import com.termux.app.terminal.TermuxTerminalViewClient;
-import com.termux.shared.terminal.io.extrakeys.ExtraKeysView;
-import com.termux.app.settings.properties.TermuxAppSharedProperties;
-import com.termux.shared.interact.TextInputDialogUtils;
-import com.termux.shared.logger.Logger;
-import com.termux.shared.termux.TermuxUtils;
-import com.termux.shared.view.ViewUtils;
-import com.termux.terminal.TerminalSession;
-import com.termux.terminal.TerminalSessionClient;
-import com.termux.app.utils.CrashUtils;
-import com.termux.view.TerminalView;
-import com.termux.view.TerminalViewClient;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
-
-/**
- * A terminal emulator activity.
- * <p/>
- * See
- * <ul>
- * <li>http://www.mongrel-phones.com.au/default/how_to_make_a_local_service_and_bind_to_it_in_android</li>
- * <li>https://code.google.com/p/android/issues/detail?id=6426</li>
- * </ul>
- * about memory leaks.
- */
+import java.util.List;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -88,6 +56,7 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.nio.charset.StandardCharsets;
 
 public final class TermuxActivity extends Activity implements ServiceConnection {
 
